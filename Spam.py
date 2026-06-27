@@ -44,7 +44,7 @@ async def on_ready():
         else:
             print("User missing from voice. Sending Discord message.")
             try:
-                await channel.send("<@750142815811534889> wake up!")
+                await channel.send("<@750142815811534889> wake up fat moobs!wake up fat moobs!wake up fat moobs!wake up fat moobs!wake up fat moobs!wake up fat moobs!")
             except Exception as e:
                 print(f"Could not send message: {e}")
 

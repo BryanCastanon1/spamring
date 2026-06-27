@@ -1,17 +1,38 @@
 import asyncio
+import os
+import discord
+from dotenv import load_dotenv
 
-member = guild.get_member(750142815811534889)
+# 1. Load environment variables
+load_dotenv()
 
-print("Waiting for user to join...")
+# 2. Initialize the bot client with permissions (This removes the yellow lines!)
+intents = discord.Intents(members=True, voice_states=True)
+client = discord.Client(intents=intents)
 
-await asyncio.sleep(10)  # wait 60 seconds
+# 3. Put your logic inside an async event
+@client.event
+async def on_ready():
+    print(f"Logged in as {client.user}")
+    
+    GUILD_ID = 822516568662868089
+    guild = client.get_guild(GUILD_ID)
+    
+    if guild is None:
+        print("Guild not found. Make sure the ID is correct and the bot is in the server.")
+        return
 
-joined = member.voice is not None
+    print("Waiting for user to join...")
+    await asyncio.sleep(10)  # Wait 10 seconds
 
-if not joined:
-    print("@accepted.bot")
-    # send reminder message here
-else:
-    print("moobs on")
+    # Fetch the member from the guild (using your target user ID)
+    member = guild.get_member(750142815811534889)
 
-client.run('MTUyMDI3NDU1MzQzNDAxNzc5Mg.GwGSv4.S84qDhHKFG62LQetzNzkUslmM0ViF8cTBg5w04')
+    if member and member.voice is not None:
+        print("moobs on")
+    else:
+        print("@accepted.bot")
+        # send reminder message here
+
+# 4. Run the bot using your .env token
+client.run(os.getenv('DISCORD_TOKEN'))

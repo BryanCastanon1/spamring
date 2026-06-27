@@ -16,14 +16,17 @@ async def on_ready():
     print(f"Logged in as {client.user}")
     
     GUILD_ID = 822516568662868089
-    TEXT_CHANNEL_ID = 822516568662868092 # 👈 PASTE YOUR COPIED TEXT CHANNEL ID HERE
+    TEXT_CHANNEL_ID = 822516568662868092  # Ensure this is a TEXT channel ID
     
     guild = client.get_guild(GUILD_ID)
-    channel = client.get_channel(TEXT_CHANNEL_ID)
     
     if guild is None:
         print("Guild not found. Check your GUILD_ID.")
         return
+
+    # Look for the channel inside this specific guild
+    channel = guild.get_channel(TEXT_CHANNEL_ID)
+    
     if channel is None:
         print("Text channel not found. Check your TEXT_CHANNEL_ID and bot permissions.")
         return
@@ -32,16 +35,14 @@ async def on_ready():
     while True:
         print("Checking user status...")
         
-        # Fetch the member from the guild
-        member = guild.get_guild(GUILD_ID).get_member(750142815811534889)
+        # Pull the fresh member object from your guild cache
+        member = guild.get_member(750142815811534889)
 
         if member and member.voice is not None:
             print("User is in a voice channel. Printing to terminal.")
-            # Optional: You can also have the bot send a message saying they joined
-            # await channel.send("moobs on")
         else:
             print("User missing from voice. Sending Discord message.")
-            # This sends an actual message tagging the user ID
+            # This sends an actual message tagging the user ID in chat
             await channel.send("<@750142815811534889> wake up!")
 
         # Wait 60 seconds before checking again

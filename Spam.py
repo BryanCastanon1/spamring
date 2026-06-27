@@ -16,7 +16,7 @@ async def on_ready():
     print(f"Logged in as {client.user}")
     
     GUILD_ID = 822516568662868089
-    TEXT_CHANNEL_ID = 123456789012345678  # 👈 PASTE YOUR COPIED TEXT CHANNEL ID HERE
+    TEXT_CHANNEL_ID = 822516568662868092 # 👈 PASTE YOUR COPIED TEXT CHANNEL ID HERE
     
     guild = client.get_guild(GUILD_ID)
     channel = client.get_channel(TEXT_CHANNEL_ID)

@@ -20,6 +20,9 @@ async def on_ready():
     
     guild = client.get_guild(GUILD_ID)
     
+    print("Available channels:", [c.name for c in guild.text_channels])
+    print("Available IDs:", [c.id for c in guild.text_channels])
+    
     if guild is None:
         print("Guild not found. Check your GUILD_ID.")
         return
